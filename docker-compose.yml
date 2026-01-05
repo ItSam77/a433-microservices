@@ -1,0 +1,47 @@
+# Menentukan versi Docker Compose yang digunakan
+# Versi 3 mendukung fitur-fitur modern seperti deploy dan configs
+version: "3"
+
+# Mendefinisikan layanan/service yang akan dijalankan
+services:
+  # Service untuk aplikasi Node.js
+  item-app:
+    # Menggunakan image dari GitHub Container Registry (ghcr.io)
+    # Ganti YOUR_GITHUB_USERNAME dengan username GitHub Anda
+    image: ghcr.io/itsam77/item-app:v1
+    
+    # Port mapping dari host ke container
+    # Format: "HOST_PORT:CONTAINER_PORT"
+    # Aplikasi dapat diakses dari port 80 di host, diteruskan ke port 8080 di container
+    ports:
+      - "80:8080"
+    
+    # Menentukan dependency antar service
+    # item-app hanya akan berjalan setelah item-db berhasil diluncurkan
+    depends_on:
+      - item-db
+    
+    # Restart policy untuk container
+    # always: container akan selalu restart ketika terhenti, termasuk saat Docker daemon restart
+    restart: always
+
+  # Service untuk database MongoDB
+  item-db:
+    # Menggunakan image MongoDB versi 3 dari Docker Hub
+    image: mongo:3
+    
+    # Mounting volume untuk persistensi data
+    # app-db adalah nama volume yang didefinisikan di bawah
+    # /data/db adalah direktori default MongoDB untuk menyimpan data
+    volumes:
+      - app-db:/data/db
+    
+    # Restart policy untuk container
+    # always: container akan selalu restart ketika terhenti
+    restart: always
+
+# Mendefinisikan volume yang digunakan oleh services
+# Volume memastikan data tetap tersimpan meskipun container dihapus
+volumes:
+  # Volume bernama app-db untuk menyimpan data MongoDB
+  app-db:

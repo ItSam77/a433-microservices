@@ -1,0 +1,45 @@
+# =============================================================================
+# LOG FILE - Docker Compose Logs
+# =============================================================================
+# File ini berisi instruksi untuk mendapatkan logs dari Docker Compose
+# 
+# Untuk mendapatkan logs, jalankan perintah berikut di terminal:
+#
+# 1. Menjalankan Docker Compose dan menyimpan logs:
+#    docker-compose up > log.txt 2>&1
+#
+# 2. Menjalankan di background dan melihat logs:
+#    docker-compose up -d
+#    docker-compose logs > log.txt 2>&1
+#
+# 3. Melihat logs secara real-time dan menyimpan ke file:
+#    docker-compose logs -f | tee log.txt
+#
+# =============================================================================
+# CONTOH OUTPUT LOGS (akan terisi saat docker-compose dijalankan):
+# =============================================================================
+#
+# Creating network "a433-microservices_default" with the default driver
+# Creating volume "a433-microservices_app-db" with default driver
+# Creating a433-microservices_item-db_1 ... done
+# Creating a433-microservices_item-app_1 ... done
+# Attaching to a433-microservices_item-db_1, a433-microservices_item-app_1
+# item-db_1   | 2024-01-04T10:00:00.000+0000 I CONTROL  [initandlisten] MongoDB starting
+# item-db_1   | 2024-01-04T10:00:00.100+0000 I CONTROL  [initandlisten] db version v3.6.23
+# item-db_1   | 2024-01-04T10:00:00.200+0000 I STORAGE  [initandlisten] wiredtiger_open config
+# item-db_1   | 2024-01-04T10:00:01.000+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+# item-app_1  | > item-app@1.0.0 start
+# item-app_1  | > node dist/main.js
+# item-app_1  | Server is running on port 8080
+# item-app_1  | Connected to MongoDB successfully
+#
+# =============================================================================
+# CATATAN:
+# =============================================================================
+# - Jalankan perintah di atas dari direktori yang sama dengan docker-compose.yml
+# - Pastikan Docker daemon sudah berjalan
+# - Gunakan Ctrl+C untuk menghentikan logs real-time
+# - Gunakan 'docker-compose down' untuk menghentikan semua container
+# =============================================================================
+
+
